@@ -22,7 +22,7 @@ _start:
 	pop  rdi      ; pop the second answer off the stack.
 	add  rdi, rax ; Add both answers and store in rbx.
 
-	mov  rax, 60  ; Exit (rbx is returned)
+	mov  rax, 60  ; Exit (rdi is returned)
 	syscall
 
 	;PURPOSE: This function is used to compute
