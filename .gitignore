@@ -1,3 +1,4 @@
 *.o
 /result
 /.direnv/flake-profile-2-link
+/build/

@@ -36,37 +36,17 @@
         };
 
         packages = flake-utils.lib.flattenTree {
-          exit = pkgs.stdenv.mkDerivation {
-            src = ./exit;
-            name = "exit";
+          bins = pkgs.stdenv.mkDerivation {
+            src = ./.;
+            name = "bins";
             buildInputs = [ pkgs.nasm ];
             installPhase = ''
               mkdir -p $out/bin
-              cp exit $out/bin/exit
-            '';
-          };
-
-          maximum = pkgs.stdenv.mkDerivation {
-            src = ./maximum;
-            name = "maximum";
-            buildInputs = [ pkgs.nasm ];
-            installPhase = ''
-              mkdir -p $out/bin
-              cp maximum $out/bin/maximum
-            '';
-          };
-
-          power = pkgs.stdenv.mkDerivation {
-            src = ./power;
-            name = "power";
-            buildInputs = [ pkgs.nasm ];
-            installPhase = ''
-              mkdir -p $out/bin
-              cp power $out/bin/power
+              cp build/* $out/bin
             '';
           };
         };
 
-        defaultPackage = packages.maximum;
+        defaultPackage = packages.bins;
       });
 }
