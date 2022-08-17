@@ -39,6 +39,7 @@
           exit = pkgs.stdenv.mkDerivation {
             src = ./exit;
             name = "exit";
+            buildInputs = [ pkgs.nasm ];
             installPhase = ''
               mkdir -p $out/bin
               cp exit $out/bin/exit
@@ -48,9 +49,20 @@
           maximum = pkgs.stdenv.mkDerivation {
             src = ./maximum;
             name = "maximum";
+            buildInputs = [ pkgs.nasm ];
             installPhase = ''
               mkdir -p $out/bin
               cp maximum $out/bin/maximum
+            '';
+          };
+
+          power = pkgs.stdenv.mkDerivation {
+            src = ./power;
+            name = "power";
+            buildInputs = [ pkgs.nasm ];
+            installPhase = ''
+              mkdir -p $out/bin
+              cp power $out/bin/power
             '';
           };
         };
