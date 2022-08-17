@@ -12,9 +12,8 @@ global _start
 global factorial 		; Only needed if we want to share this
 				; function with other programs.
 _start:
-	push 4 			; Factorial takes one argument.
+	push 6 			; Factorial takes one argument.
 	call factorial 		; Run the factorial function
-	add rsp, 8 		; Scrub the parameter that was pushed on the stack.
 	mov rdi, rax 		; Factorial returns the answer in rax
 				; but we want it in rdi to send as our
 				; exit status.
@@ -42,7 +41,3 @@ end_factorial:
 	mov rsp, rbp
 	pop rbp
 	ret
-	
-	
-	
-

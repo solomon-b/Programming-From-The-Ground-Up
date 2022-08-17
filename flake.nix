@@ -29,6 +29,7 @@
         devShell = pkgs.mkShell {
           buildInputs = [
             pkgs.gef
+            pkgs.gdb
             pkgs.nasm
             pkgs.pwntools
             pkgs.radare2
