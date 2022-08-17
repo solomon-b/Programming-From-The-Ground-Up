@@ -28,15 +28,23 @@
       rec {
         devShell = pkgs.mkShell {
           buildInputs = [
-            pkgs.gcc
             pkgs.gef
+            pkgs.nasm
             pkgs.pwntools
             pkgs.radare2
-            #pkgs.nasm
           ];
         };
 
         packages = flake-utils.lib.flattenTree {
+          exit = pkgs.stdenv.mkDerivation {
+            src = ./exit;
+            name = "exit";
+            installPhase = ''
+              mkdir -p $out/bin
+              cp exit $out/bin/exit
+            '';
+          };
+
           maximum = pkgs.stdenv.mkDerivation {
             src = ./maximum;
             name = "maximum";
