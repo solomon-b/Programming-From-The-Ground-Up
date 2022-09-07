@@ -2,13 +2,15 @@
 	;characters converted to spongecase.
 	;
 	;PROCESSING:
-	; 1. Open the input file.
-	; 2. Open the output file.
-	; 3. While we're not at the end of the file:
-	;    A. Read part of the input file into the memory buffer.
-	;    B. Go through each byte of memory. If the byte is a
-	;    lowercase letter, then convert it to uppercase.
-	;    C. Write the memory buffer to the output file.
+	; 0. Check if input and output filenames were provided in argv.
+	; 1. If not then use STDIN and STDOUT file handles.
+	; 2. If so, then:
+	;    A. Open the output file.
+	;    B. While we're not at the end of the file:
+	;       i. Read part of the input file into the memory buffer.
+	;       ii. Go through each byte of memory. If the byte is a
+	;       lowercase letter, then convert it to uppercase.
+	;       iii. Write the memory buffer to the output file.
 
 	;; CONSTANTS
 section .data
