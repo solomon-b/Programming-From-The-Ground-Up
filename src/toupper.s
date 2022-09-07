@@ -38,7 +38,6 @@ section .data
 	eof equ 0
 	num_args equ 2
 
-
         ;; constants for the case conversion function.
 	; Lower boundary of the search.
 	lowercase_a equ 'a'
@@ -51,6 +50,10 @@ section .data
 	st_buffer_len equ 16
 	; Conversion function buffer
 	st_buffer equ 24
+
+	; Error Messages
+	error_bad_path db "Invalid path"
+	error_permission_denied db "Permission denied"
 
 section .bss
         ;; Reserve read/write buffer
@@ -95,6 +98,12 @@ open_fd_in:
 	mov rdx, 0o666
 	; call Linux
 	syscall
+
+	cmp rax, -13
+	je throw_permission_denied
+
+	cmp rax, -2
+	je throw_bad_path
 
 store_fd_in:
 	; Save the input file descriptor
@@ -224,7 +233,24 @@ end_convert_loop:
 	pop rbp
 	ret
 
-fail:
+throw_permission_denied:
+	mov rax, sys_write
+	mov rdi, stdout
+	mov rsi, error_permission_denied
+	mov rdx, 17
+	syscall
+
+	mov rax, sys_exit
+	mov rdi, 1
+	syscall
+
+throw_bad_path:
+	mov rax, sys_write
+	mov rdi, stdout
+	mov rsi, error_bad_path
+	mov rdx, 12
+	syscall
+
 	mov rax, sys_exit
 	mov rdi, 1
 	syscall
