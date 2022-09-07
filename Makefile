@@ -1,4 +1,9 @@
-all : exit maximum power factorial
+all : exit maximum power factorial toupper
+
+toupper: mkBuildDir
+	nasm -f elf64 src/toupper.s -o build/toupper.o
+	ld build/toupper.o -o build/toupper
+	rm build/toupper.o
 
 factorial: mkBuildDir
 	nasm -f elf64 src/factorial.s -o build/factorial.o
