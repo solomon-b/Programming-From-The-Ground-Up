@@ -1,4 +1,9 @@
-all : exit maximum power factorial toupper
+all : exit maximum power factorial toupper spongebob
+
+spongebob: mkBuildDir
+	nasm -f elf64 src/spongebob.s -o build/spongebob.o
+	ld build/spongebob.o -o build/spongebob
+	rm build/spongebob.o
 
 toupper: mkBuildDir
 	nasm -f elf64 src/toupper.s -o build/toupper.o
